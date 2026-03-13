@@ -23,9 +23,31 @@ include 'includes/footer.php';
 </head>
 <body>
     <main>
-    <h1>Bienvenue sur le projet de MANSOURI & BELHIBA</h1>
-    <p>Ici, le contenu spécifique de l'accueil.</p>
+    <head>
+    <meta charset="UTF-8">
+    <title>Mon Super Projet</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.php">Accueil</a>
+                <?php if($_SESSION['role'] === 'administrateur'): ?>
+            <li><a href="gestion_utilisateur.php">Gestion utilisateurs</a></li>
+            <li><a href="gestion_avis.php">Gestion avis</a></li>
+                 <?php endif; ?>
+
+              <li><a href="logout.php">Déconnexion</a></li>
+            </nav>
+    </header>
 </main>
 
+</body>
+</html>
+
+<footer>
+        <p>&copy; 2026 - Projet PHP Club-lecture Y.B & Y.M</p>
+    </footer>
+    <script src="js/app.js"></script>
 </body>
 </html>
