@@ -1,19 +1,3 @@
-<?php 
-// 1. On charge les outils et la sécurité d'abord
-require_once 'includes/functions.php';
-require_once 'includes/auth.php';
-
-// 2. On affiche le haut de page
-include 'includes/header.php'; 
-?>
-
-
-<?php 
-// 3. On affiche le bas de page
-include 'includes/footer.php'; 
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +32,6 @@ include 'includes/footer.php';
 <footer>
         <p>&copy; 2026 - Projet PHP Club-lecture Y.B & Y.M</p>
     </footer>
-    <script src="js/app.js"></script>
+    <script src="/club_lecture/assets/main.js"></script>
 </body>
 </html>
