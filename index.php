@@ -1,3 +1,16 @@
+<?php
+session_start();
+require_once __DIR__ . '/../includes/header.php';
+
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    @session_start();
+}
+
+if (!isset($_SESSION) || !is_array($_SESSION)) {
+    $_SESSION = [];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +29,7 @@
     <header>
         <nav>
             <a href="index.php">Accueil</a>
-                <?php if($_SESSION['role'] === 'administrateur'): ?>
+                <?php if (($_SESSION['role'] ?? null) === 'administrateur'): ?>
             <li><a href="gestion_utilisateur.php">Gestion utilisateurs</a></li>
             <li><a href="gestion_avis.php">Gestion avis</a></li>
                  <?php endif; ?>
