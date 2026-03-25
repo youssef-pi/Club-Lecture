@@ -32,6 +32,7 @@ if (!isset($_SESSION) || !is_array($_SESSION)) {
                 <?php if (($_SESSION['role'] ?? null) === 'administrateur'): ?>
             <li><a href="gestion_utilisateur.php">Gestion utilisateurs</a></li>
             <li><a href="gestion_avis.php">Gestion avis</a></li>
+            <li><a href="/club_lecture/pages/books/list.php">Gérer les lectures (Livres)</a></li>
                  <?php endif; ?>
 
               <li><a href="logout.php">Déconnexion</a></li>
