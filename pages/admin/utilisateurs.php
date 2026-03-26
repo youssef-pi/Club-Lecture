@@ -11,6 +11,8 @@ $allowedStatuts = ['actif', 'banni'];
 $action = $_POST['action'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  verifyCsrfOrFail();
+
     if ($action === 'add_user') {
         $nom = trim($_POST['nom'] ?? '');
         $email = trim($_POST['email'] ?? '');
@@ -85,6 +87,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         if ($newPassword !== '' && strlen($newPassword) < 6) {
             $errors[] = 'Nouveau mot de passe trop court (min 6 caractères).';
+        }
+        if (isset($_SESSION['user_id']) && (int) $_SESSION['user_id'] === $id) {
+          if ($statut === 'banni') {
+            $errors[] = 'Vous ne pouvez pas vous bannir vous-meme.';
+          }
+          if ($role !== 'admin') {
+            $errors[] = 'Vous ne pouvez pas retirer votre propre role admin.';
+          }
         }
 
         if (!$errors) {
@@ -181,6 +191,7 @@ if ($result) {
     <section>
       <h2>Ajouter un utilisateur</h2>
       <form method="post">
+        <?= csrfInput() ?>
         <input type="hidden" name="action" value="add_user">
 
         <label>Nom</label><br>
@@ -233,6 +244,7 @@ if ($result) {
               <?php foreach ($users as $user): ?>
                 <tr>
                   <form method="post" class="action-inline-form">
+                    <?= csrfInput() ?>
                     <input type="hidden" name="action" value="update_user">
                     <input type="hidden" name="id" value="<?= (int) $user['id'] ?>">
 
@@ -265,6 +277,7 @@ if ($result) {
                   </form>
 
                   <form method="post" class="action-inline-form" onsubmit="return confirm('Supprimer cet utilisateur ?');">
+                    <?= csrfInput() ?>
                     <input type="hidden" name="action" value="delete_user">
                     <input type="hidden" name="id" value="<?= (int) $user['id'] ?>">
                     <button type="submit" class="btn-danger">Supprimer</button>

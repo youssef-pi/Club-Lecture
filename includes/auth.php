@@ -33,10 +33,24 @@ function currentUserRole() {
     return $_SESSION['role'] ?? 'guest';
 }
 
+function requireLogin() {
+    if (!isLoggedIn()) {
+        header("Location: /club-lecture/pages/auth/login.php");
+        exit();
+    }
+}
+
 // Protection de page : redirect si pas admin
 function restrictToAdmin() {
     if (!isAdmin()) {
         header("Location: /club-lecture/index.php");
+        exit();
+    }
+}
+
+function restrictToModerator() {
+    if (!isModerator()) {
+        header("Location: /club-lecture/pages/403.php");
         exit();
     }
 }
