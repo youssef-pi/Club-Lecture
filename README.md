@@ -37,6 +37,13 @@ INSERT INTO users (nom, email, password_hash, role, statut)
 VALUES ('Admin', 'admin@club.local', 'COLLER_LE_HASH_ICI', 'admin', 'actif');
 ```
 
+Option via script PHP (compatible login actuel):
+
+1. Depuis le dossier du projet:
+	- `php create_admin.php "Admin" "admin@club.local" "Admin123!"`
+2. Le script utilise `mysqli`, genere `password_hash`, et ecrit dans `users.password_hash`.
+3. Si l'email existe deja, le compte est mis a jour en `role=admin` et `statut=actif`.
+
 ## Roles
 
 - `membre`:
