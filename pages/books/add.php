@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../includes/database.php';
 $role = $_SESSION['role'] ?? '';
 // Seuls Admin et Modo peuvent ajouter [cite: 53]
 if ($role !== 'admin' && $role !== 'moderateur') {
-    header('Location: ../../403.php');
+    header('Location: /club-lecture/pages/403.php');
     exit;
 }
 
@@ -39,7 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-<head><title>Ajouter un livre</title></head>
+<head>
+    <title>Ajouter un livre</title>
+    <link rel="stylesheet" href="/club-lecture/pages/style/style.css?v=20260326">
+</head>
 <body>
     <h1>Ajouter une nouvelle lecture</h1>
     <?php if ($errors): ?>
@@ -66,5 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Enregistrer le livre</button>
         <a href="list.php">Annuler</a>
     </form>
+
+    <script src="/club-lecture/pages/style/main.js?v=20260326"></script>
 </body>
 </html>

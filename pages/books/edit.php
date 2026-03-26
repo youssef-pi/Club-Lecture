@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../includes/database.php';
 
 $role = $_SESSION['role'] ?? '';
 if ($role !== 'admin' && $role !== 'moderateur') {
-    header('Location: ../../403.php');
+    header('Location: /club-lecture/pages/403.php');
     exit;
 }
 
@@ -47,7 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-<head><title>Modifier le livre</title></head>
+<head>
+    <title>Modifier le livre</title>
+    <link rel="stylesheet" href="/club-lecture/pages/style/style.css?v=20260326">
+</head>
 <body>
     <h1>Modifier : <?= htmlspecialchars($book['titre']) ?></h1>
     <?php if ($errors): ?>
@@ -75,5 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Mettre à jour</button>
         <a href="list.php">Annuler</a>
     </form>
+
+    <script src="/club-lecture/pages/style/main.js?v=20260326"></script>
 </body>
 </html>

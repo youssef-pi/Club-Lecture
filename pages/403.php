@@ -10,6 +10,6 @@ http_response_code(403);
 <body>
   <h1>403 - Accès interdit</h1>
   <p>Vous n’avez pas les permissions nécessaires.</p>
-  <p><a href="/club-lecture/pages/dashboard.php">Retour au dashboard</a></p>
+  <p><a href="/club-lecture/index.php">Retour a l'accueil</a></p>
 </body>
 </html>

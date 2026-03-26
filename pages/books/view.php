@@ -20,7 +20,10 @@ if (!$book) {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-<head><title><?= htmlspecialchars($book['titre']) ?></title></head>
+<head>
+    <title><?= htmlspecialchars($book['titre']) ?></title>
+    <link rel="stylesheet" href="/club-lecture/pages/style/style.css?v=20260326">
+</head>
 <body>
     <h1><?= htmlspecialchars($book['titre']) ?></h1>
     <p><strong>Auteur :</strong> <?= htmlspecialchars($book['auteur']) ?></p>
@@ -38,5 +41,7 @@ if (!$book) {
 
     <h2>Ma progression</h2>
     <p><em>Module progression à venir...</em></p>
+
+    <script src="/club-lecture/pages/style/main.js?v=20260326"></script>
 </body>
 </html>

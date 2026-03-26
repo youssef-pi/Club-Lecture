@@ -2,6 +2,11 @@
 session_start();
 require_once __DIR__ . '/../../includes/database.php';
 
+if (isset($_SESSION['user_id'])) {
+  header('Location: /club-lecture/index.php');
+  exit;
+}
+
 $errors = [];
 $email = '';
 
@@ -13,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($password === '') $errors[] = "Mot de passe requis.";
 
     if (!$errors) {
-        $stmt = $conn->prepare("SELECT id, nom, email, password_hash, role, statut FROM users WHERE email = ? LIMIT 1");
+        $stmt = $mysqli->prepare("SELECT id, nom, email, password_hash, role, statut FROM users WHERE email = ? LIMIT 1");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $res = $stmt->get_result();
@@ -34,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['role'] = $user['role'];
 
-                header('Location: ../dashboard.php');
+                header('Location: /club-lecture/index.php');
                 exit;
             }
         }
@@ -48,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="utf-8">
   <title>Connexion</title>
+  <link rel="stylesheet" href="/club-lecture/pages/style/style.css?v=20260326">
 </head>
 <body>
   <h1>Connexion</h1>
@@ -71,5 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </form>
 
   <p>Pas de compte ? <a href="register.php">Inscription</a></p>
+  <script src="/club-lecture/pages/style/main.js?v=20260326"></script>
 </body>
 </html>

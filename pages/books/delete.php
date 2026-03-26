@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../includes/database.php';
 
 // Seul l'Admin peut supprimer un livre [cite: 53]
 if (($_SESSION['role'] ?? '') !== 'admin') {
-    header('Location: ../../403.php');
+    header('Location: /club-lecture/pages/403.php');
     exit;
 }
 

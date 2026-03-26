@@ -5,35 +5,26 @@ require_once __DIR__ . '/auth.php';
 
 $loggedIn = isLoggedIn();
 $role = currentUserRole(); // 'guest' si pas connecté
+$appName = defined('APP_NAME') ? constant('APP_NAME') : 'Club de Lecture';
 ?>
 <!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?= htmlspecialchars(APP_NAME ?? 'Club de Lecture') ?></title>
-  <link rel="stylesheet" href="/club-lecture/assets/css/style.css">
+  <title><?= htmlspecialchars($appName) ?></title>
+  <link rel="stylesheet" href="/club-lecture/pages/style/style.css?v=20260326">
 </head>
 <body>
 
 <header>
   <nav style="display:flex; gap:12px; align-items:center; padding:10px; border-bottom:1px solid #ddd;">
-    <a href="/club-lecture/pages/dashboard.php"><strong>Club de Lecture</strong></a>
+    <strong>Club de Lecture</strong>
 
     <div style="display:flex; gap:10px; margin-left:20px;">
-      <?php if (!$loggedIn): ?>
-        <a href="/club-lecture/pages/auth/login.php">Login</a>
-        <a href="/club-lecture/pages/auth/register.php">Register</a>
-      <?php else: ?>
-        <a href="/club-lecture/pages/dashboard.php">Dashboard</a>
-        <a href="/club-lecture/pages/books/list.php">Livres</a>
-        <a href="/club-lecture/pages/sessions/list.php">Sessions</a>
-
-        <?php if ($role === 'admin'): ?>
-          <a href="/club-lecture/pages/admin/users.php">Admin</a>
-        <?php endif; ?>
-
-        <a href="/club-lecture/pages/auth/logout.php">Logout</a>
+      <a href="/club-lecture/index.php">Accueil</a>
+      <?php if ($loggedIn): ?>
+        <a href="/club-lecture/pages/auth/logout.php">Déconnexion</a>
       <?php endif; ?>
     </div>
 
@@ -41,7 +32,9 @@ $role = currentUserRole(); // 'guest' si pas connecté
       <?php if ($loggedIn): ?>
         <span>
           Connecté : <?= htmlspecialchars($_SESSION['nom'] ?? '') ?>
-          (<?= htmlspecialchars($_SESSION['role'] ?? '') ?>)
+          <?php if (($role ?? 'membre') !== 'membre'): ?>
+            (<?= htmlspecialchars($_SESSION['role'] ?? '') ?>)
+          <?php endif; ?>
         </span>
       <?php endif; ?>
     </div>

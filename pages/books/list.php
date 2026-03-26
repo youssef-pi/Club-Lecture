@@ -19,11 +19,12 @@ $result = mysqli_query($mysqli, $query);
 <head>
     <meta charset="UTF-8">
     <title>Liste des lectures</title>
+    <link rel="stylesheet" href="/club-lecture/pages/style/style.css?v=20260326">
 </head>
 <body>
     <h1>Lectures du Club</h1>
     
-    <a href="../dashboard.php">Retour au Dashboard</a> | 
+    <a href="/club-lecture/index.php">Retour a l'accueil</a> |
     <?php if ($role === 'admin' || $role === 'moderateur'): ?>
         <a href="add.php"><button>Ajouter un livre</button></a>
     <?php endif; ?>
@@ -60,5 +61,7 @@ $result = mysqli_query($mysqli, $query);
             <?php endwhile; ?>
         </tbody>
     </table>
+
+    <script src="/club-lecture/pages/style/main.js?v=20260326"></script>
 </body>
 </html>
