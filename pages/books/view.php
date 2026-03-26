@@ -199,6 +199,11 @@ require_once __DIR__ . '/../../includes/header.php';
 
         <h1><?= htmlspecialchars($book['titre']) ?></h1>
         <p><strong>Auteur :</strong> <?= htmlspecialchars($book['auteur']) ?></p>
+        <?php if (!empty($book['cover_path'])): ?>
+            <p>
+                <img src="<?= htmlspecialchars($book['cover_path']) ?>" alt="Cover de <?= htmlspecialchars($book['titre']) ?>" style="max-width: 220px; height: auto; border-radius: 6px;">
+            </p>
+        <?php endif; ?>
         <p><strong>Periode :</strong> Du <?= htmlspecialchars($book['date_debut'] ?? 'N/A') ?> au <?= htmlspecialchars($book['date_fin'] ?? 'N/A') ?></p>
         <p><strong>Description :</strong><br><?= nl2br(htmlspecialchars($book['description'] ?? 'Aucune description.')) ?></p>
         <p><a href="list.php">Retour a la liste</a></p>
