@@ -1,29 +1,26 @@
 <?php
-// Connexion à la base de données
+// Retourne la connexion MySQLi partagée
 function getDB() {
-    $host = 'localhost';
-    $dbname = 'club_lecture';
-    $user = 'root';
-    $pass = ''; // mettre sur $pass ='root' si sur mac
-
-    return new PDO(
-        "mysql:host={$host};dbname={$dbname};charset=utf8mb4",
-        $user,
-        $pass,
-        [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        ]
-    );
+    global $mysqli;
+    return $mysqli;
 }
 
-// Vérifier si l'utilisateur est banni 
+// Vérifier si l'utilisateur est banni
 function isBanned($user_id) {
     $db = getDB();
-    $stmt = $db->prepare("SELECT statut FROM users WHERE id = ?");
-    $stmt->execute([$user_id]);
-    $user = $stmt->fetch();
-    return ($user && $user['statut'] === 'banni');
+    if (!$db || !($db instanceof mysqli)) {
+        return false;
+    }
+
+    $uid = (int) $user_id;
+    $stmt = $db->prepare("SELECT statut FROM users WHERE id = ? LIMIT 1");
+    $stmt->bind_param("i", $uid);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $user = $res ? $res->fetch_assoc() : null;
+    $stmt->close();
+
+    return ($user && ($user['statut'] ?? '') === 'banni');
 }
 
 // Donner la session a l'individu concerné

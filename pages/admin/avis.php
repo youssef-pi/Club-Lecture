@@ -55,25 +55,11 @@ if ($res) {
         $reviews[] = $row;
     }
 }
-?>
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin - Gestion des avis</title>
-  <link rel="stylesheet" href="/club-lecture/pages/style/style.css?v=20260326">
-</head>
-<body>
-  <header>
-    <nav>
-      <a href="/club-lecture/index.php">Accueil</a>
-      <a href="/club-lecture/pages/books/list.php">Lectures</a>
-      <a href="/club-lecture/pages/auth/logout.php">Deconnexion</a>
-    </nav>
-  </header>
 
-  <main>
+define('APP_NAME', 'Admin - Gestion des avis');
+require_once __DIR__ . '/../../includes/header.php';
+?>
+
     <h1>Moderation des avis</h1>
     <p><a href="/club-lecture/index.php">Retour a l'accueil</a></p>
 
@@ -138,8 +124,4 @@ if ($res) {
         </table>
       </div>
     <?php endif; ?>
-  </main>
-
-  <script src="/club-lecture/pages/style/main.js?v=20260326"></script>
-</body>
-</html>
+<?php require_once __DIR__ . '/../../includes/footer.php'; ?>

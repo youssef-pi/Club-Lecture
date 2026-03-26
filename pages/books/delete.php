@@ -1,21 +1,22 @@
 <?php
-session_start();
-require_once __DIR__ . '/../../includes/database.php';
+require_once __DIR__ . '/../../includes/auth.php';
+requireLogin();
+restrictToAdmin();
 
-// Seul l'Admin peut supprimer un livre [cite: 53]
-if (($_SESSION['role'] ?? '') !== 'admin') {
-    header('Location: /club-lecture/pages/403.php');
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: /club-lecture/pages/books/list.php');
     exit;
 }
 
-$id = $_GET['id'] ?? 0;
+verifyCsrfOrFail();
 
-if ($id) {
+$id = (int) ($_POST['id'] ?? 0);
+if ($id > 0) {
     $stmt = $mysqli->prepare("DELETE FROM books WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->close();
 }
 
-header('Location: list.php');
+header('Location: /club-lecture/pages/books/list.php');
 exit;

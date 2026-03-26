@@ -1,10 +1,8 @@
 <?php
-// À mettre tout en haut de chaque page AVANT d'inclure header.php : session_start();
-// Ici on suppose que la session est déjà démarrée.
 require_once __DIR__ . '/auth.php';
 
 $loggedIn = isLoggedIn();
-$role = currentUserRole(); // 'guest' si pas connecté
+$role = currentUserRole();
 $appName = defined('APP_NAME') ? constant('APP_NAME') : 'Club de Lecture';
 ?>
 <!doctype html>
@@ -18,27 +16,28 @@ $appName = defined('APP_NAME') ? constant('APP_NAME') : 'Club de Lecture';
 <body>
 
 <header>
-  <nav style="display:flex; gap:12px; align-items:center; padding:10px; border-bottom:1px solid #ddd;">
-    <strong>Club de Lecture</strong>
+  <nav>
+    <a href="/club-lecture/index.php">Accueil</a>
 
-    <div style="display:flex; gap:10px; margin-left:20px;">
-      <a href="/club-lecture/index.php">Accueil</a>
-      <?php if ($loggedIn): ?>
-        <a href="/club-lecture/pages/auth/logout.php">Déconnexion</a>
-      <?php endif; ?>
-    </div>
+    <?php if ($loggedIn): ?>
+      <a href="/club-lecture/pages/books/list.php">Livres</a>
+      <a href="/club-lecture/pages/sessions/list.php">Sessions</a>
 
-    <div style="margin-left:auto;">
-      <?php if ($loggedIn): ?>
-        <span>
-          Connecté : <?= htmlspecialchars($_SESSION['nom'] ?? '') ?>
-          <?php if (($role ?? 'membre') !== 'membre'): ?>
-            (<?= htmlspecialchars($_SESSION['role'] ?? '') ?>)
-          <?php endif; ?>
-        </span>
+      <?php if ($role === 'admin' || $role === 'moderateur'): ?>
+        <a href="/club-lecture/pages/admin/avis.php">Moderation avis</a>
+        <a href="/club-lecture/pages/admin/sessions.php">Gestion sessions</a>
       <?php endif; ?>
-    </div>
+
+      <?php if ($role === 'admin'): ?>
+        <a href="/club-lecture/pages/admin/utilisateurs.php">Admin utilisateurs</a>
+      <?php endif; ?>
+
+      <a href="/club-lecture/pages/auth/logout.php">Deconnexion</a>
+    <?php else: ?>
+      <a href="/club-lecture/pages/auth/login.php">Connexion</a>
+      <a href="/club-lecture/pages/auth/register.php">Inscription</a>
+    <?php endif; ?>
   </nav>
 </header>
 
-<main style="padding: 16px;">
+<main>

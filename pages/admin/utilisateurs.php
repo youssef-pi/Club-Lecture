@@ -162,17 +162,11 @@ if ($result) {
         $users[] = $row;
     }
 }
+
+define('APP_NAME', 'Admin - Utilisateurs');
+require_once __DIR__ . '/../../includes/header.php';
 ?>
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin - Utilisateurs</title>
-  <link rel="stylesheet" href="/club-lecture/pages/style/style.css?v=20260326">
-</head>
-<body>
-  <main>
+
     <h1>Administration des utilisateurs</h1>
     <p><a href="/club-lecture/index.php">← Retour à l'accueil</a></p>
 
@@ -290,7 +284,4 @@ if ($result) {
         </div>
       <?php endif; ?>
     </section>
-  </main>
-  <script src="/club-lecture/pages/style/main.js?v=20260326"></script>
-</body>
-</html>
+<?php require_once __DIR__ . '/../../includes/footer.php'; ?>

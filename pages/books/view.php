@@ -192,25 +192,11 @@ while ($a = $attRes->fetch_assoc()) {
 $attStmt->close();
 
 $successCode = $_GET['success'] ?? '';
-?>
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= htmlspecialchars($book['titre']) ?></title>
-    <link rel="stylesheet" href="/club-lecture/pages/style/style.css?v=20260326">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="/club-lecture/index.php">Accueil</a>
-            <a href="/club-lecture/pages/books/list.php">Lectures</a>
-            <a href="/club-lecture/pages/auth/logout.php">Deconnexion</a>
-        </nav>
-    </header>
 
-    <main>
+define('APP_NAME', $book['titre']);
+require_once __DIR__ . '/../../includes/header.php';
+?>
+
         <h1><?= htmlspecialchars($book['titre']) ?></h1>
         <p><strong>Auteur :</strong> <?= htmlspecialchars($book['auteur']) ?></p>
         <p><strong>Periode :</strong> Du <?= htmlspecialchars($book['date_debut'] ?? 'N/A') ?> au <?= htmlspecialchars($book['date_fin'] ?? 'N/A') ?></p>
@@ -338,8 +324,4 @@ $successCode = $_GET['success'] ?? '';
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>
-    </main>
-
-    <script src="/club-lecture/pages/style/main.js?v=20260326"></script>
-</body>
-</html>
+<?php require_once __DIR__ . '/../../includes/footer.php'; ?>
