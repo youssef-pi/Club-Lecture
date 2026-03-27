@@ -50,9 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Image invalide (max 5 Mo).";
       } else {
         $tmpPath = $_FILES['image']['tmp_name'] ?? '';
+        // On lit le vrai type du fichier image (pas seulement l'extension .jpg/.png).
+        $mime = '';
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime = $finfo ? finfo_file($finfo, $tmpPath) : '';
-        if ($finfo) {
+        if ($finfo !== false) {
+          $mime = finfo_file($finfo, $tmpPath);
           finfo_close($finfo);
         }
 
@@ -97,9 +99,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $bookOriginalName = trim((string) ($_FILES['book_file']['name'] ?? ''));
         $bookExt = strtolower((string) pathinfo($bookOriginalName, PATHINFO_EXTENSION));
 
+        // Meme principe pour le livre : on verifie que c'est un vrai PDF.
+        $bookMime = '';
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $bookMime = $finfo ? finfo_file($finfo, $bookTmpPath) : '';
-        if ($finfo) {
+        if ($finfo !== false) {
+          $bookMime = finfo_file($finfo, $bookTmpPath);
           finfo_close($finfo);
         }
 
