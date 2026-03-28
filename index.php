@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/inclusions/auth.php';
 requireLogin();
 
 $role = currentUserRole();
@@ -19,7 +19,7 @@ if ($sessionsRes) {
 }
 
 define('APP_NAME', 'Club de Lecture');
-require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/inclusions/header.php';
 ?>
 
 <h1>Club de Lecture</h1>
@@ -33,10 +33,10 @@ require_once __DIR__ . '/includes/header.php';
   <section class="admin-panel">
     <h2>Panneau d'administration</h2>
     <div class="admin-actions">
-      <a class="admin-action-btn" href="/club-lecture/pages/admin/utilisateurs.php">Gestion des utilisateurs</a>
-      <a class="admin-action-btn" href="/club-lecture/pages/admin/avis.php">Gestion des avis</a>
-      <a class="admin-action-btn" href="/club-lecture/pages/books/list.php">Gestion des livres</a>
-      <a class="admin-action-btn" href="/club-lecture/pages/admin/sessions.php">Gestion des sessions</a>
+      <a class="admin-action-btn" href="/club-lecture/pages/administration/utilisateurs.php">Gestion des utilisateurs</a>
+      <a class="admin-action-btn" href="/club-lecture/pages/administration/avis.php">Gestion des avis</a>
+      <a class="admin-action-btn" href="/club-lecture/pages/livres/liste.php">Gestion des livres</a>
+      <a class="admin-action-btn" href="/club-lecture/pages/administration/sessions.php">Gestion des sessions</a>
     </div>
   </section>
 <?php endif; ?>
@@ -51,11 +51,12 @@ require_once __DIR__ . '/includes/header.php';
         <li>
           <strong><?= htmlspecialchars($session['titre']) ?></strong>
           - <?= htmlspecialchars($session['date_heure']) ?>
-          (Livre: <a href="/club-lecture/pages/books/view.php?id=<?= (int) $session['book_id'] ?>"><?= htmlspecialchars($session['book_titre']) ?></a>)
+          (Livre: <a href="/club-lecture/pages/livres/voir.php?id=<?= (int) $session['book_id'] ?>"><?= htmlspecialchars($session['book_titre']) ?></a>)
         </li>
       <?php endforeach; ?>
     </ul>
   <?php endif; ?>
 </section>
 
-<?php require_once __DIR__ . '/includes/footer.php'; ?>
+<?php require_once __DIR__ . '/inclusions/footer.php'; ?>
+

@@ -1,0 +1,6 @@
+body.create-admin-page { font-family: sans-serif; max-width: 560px; margin: 40px auto; }
+body.create-admin-page label { display: block; margin-top: 12px; }
+body.create-admin-page input { width: 100%; padding: 8px; }
+body.create-admin-page button { margin-top: 16px; padding: 8px 12px; }
+body.create-admin-page .ok { color: #0a7f2e; }
+body.create-admin-page .ko { color: #b00020; }

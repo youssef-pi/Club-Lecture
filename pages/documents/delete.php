@@ -1,10 +1,10 @@
 <?php
-require_once __DIR__ . '/../../includes/auth.php';
+require_once __DIR__ . '/../../inclusions/auth.php';
 requireLogin();
 restrictToModerator();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /club-lecture/pages/books/list.php');
+    header('Location: /club-lecture/pages/livres/liste.php');
     exit;
 }
 
@@ -13,7 +13,7 @@ verifyCsrfOrFail();
 $docId = (int) ($_POST['id'] ?? 0);
 $bookId = (int) ($_POST['book_id'] ?? 0);
 if ($docId <= 0 || $bookId <= 0) {
-    header('Location: /club-lecture/pages/books/list.php?error=doc_delete');
+    header('Location: /club-lecture/pages/livres/liste.php?error=doc_delete');
     exit;
 }
 
@@ -35,5 +35,6 @@ if ($doc) {
     }
 }
 
-header('Location: /club-lecture/pages/books/view.php?id=' . $bookId . '&success=doc_deleted');
+header('Location: /club-lecture/pages/livres/voir.php?id=' . $bookId . '&success=doc_deleted');
 exit;
+

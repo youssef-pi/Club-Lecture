@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../../includes/database.php';
+require_once __DIR__ . '/../../inclusions/database.php';
 
 if (isset($_SESSION['user_id'])) {
   header('Location: /club-lecture/index.php');
@@ -53,13 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="utf-8">
   <title>Connexion</title>
-  <link rel="stylesheet" href="/club-lecture/pages/style/style.css?v=20260326">
+  <link rel="stylesheet" href="/club-lecture/pages/styles/principal.css?v=20260328-1">
 </head>
 <body>
   <h1>Connexion</h1>
 
   <?php if ($errors): ?>
-    <ul style="color:red;">
+    <ul class="auth-error-list">
       <?php foreach ($errors as $e): ?>
         <li><?= htmlspecialchars($e) ?></li>
       <?php endforeach; ?>
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit">Se connecter</button>
   </form>
 
-  <p>Pas de compte ? <a href="register.php">Inscription</a></p>
-  <script src="/club-lecture/pages/style/main.js?v=20260326"></script>
+  <p>Pas de compte ? <a href="inscription.php">Inscription</a></p>
+  <script src="/club-lecture/pages/styles/principal.js?v=20260328-2"></script>
 </body>
 </html>
